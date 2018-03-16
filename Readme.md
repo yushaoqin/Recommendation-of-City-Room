@@ -11,7 +11,27 @@
 
 YourTourSpot文件夹： 客户端实现
 
+​    \www : JS、CSS、HTML等文件
+
+​    \platforms\android\build\outputs\apk：安卓客户端安装包
+
 YSTServer文件夹：服务器端实现
+
+​    \src\NLPIR：中科院NLPIR汉语分词系统SDK
+
+​    \src\recommendation:以基于用户的协同过滤为基础的推荐算法实现
+
+​    \src\services:服务实现
+
+​    \src\servlet:请求处理
+
+​    \src\model:数据模型
+
+​    \src\mapper:mybatis映射
+
+​    \src\filter: SpringMVC拦截
+
+
 
 
 ## 环境需求
