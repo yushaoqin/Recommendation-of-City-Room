@@ -1,0 +1,55 @@
+<ion-view view-title="Map">
+
+    <ion-content class="padding">
+
+        <div class="bar bar-header " id="home_search" ng-show="!isSelectLocation">
+            <label class="item-input item" style="width: 100%">
+                <button class="icon ion-search placeholder-icon button-clear" ng-click="search()"></button>
+                <label class="bar item item-input ">
+                    <input type="text" placeholder="Search" ng-model="search_text.string">
+                </label>
+            </label>
+
+        </div>
+
+        <!--<div style="position: absolute;top: 0px; z-index: 2"  id="home_search">-->
+
+
+            <!--<p>-->
+                <!--<a class="button icon icon-right ion-chevron-right" href="#/tab/search">搜索</a>-->
+            <!--</p>-->
+        <!--</div>-->
+        <!--<div style="position: absolute;top: 100px;right: 0px; z-index: 2;display:none"  id="home_select_location" ng-show="!isSelectLocation">-->
+            <!--<button class="button button-clear " ng-click="commit_location()">确定1111111111</button>-->
+        <!--</div>-->
+
+        <div class="row bar bar-footer" id="home_foot" >
+            <div class="item tabs tabs-secondary tabs-icon-left" ng-show="!isSelectLocation">
+                <button class="tab-item button-clear"  ng-click="showNewRoomModal()">
+                    <i class="icon ion-plus-circled"></i>
+                    添加空间信息
+                </button>
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left" ng-show="isSelectLocation">
+                <button class="tab-item button-clear"  ng-click="commit_location()">
+                    <i class="icon ion-plus-circled"></i>
+                    确认位置
+                </button>
+            </div>
+            <!--<button class="button button-clear col-50"  ng-click="showNewRoomModal()">添加新空间</button>-->
+            <!--<button class="button button-clear col-50" ng-click="modal.show()">添加新空间</button>-->
+        </div>
+
+        <!--<div style="position: absolute;bottom: 0px; z-index: 2">-->
+            <!--<button class="button button-positive" ng-click="modal.show()">添加新空间</button>-->
+        <!--</div>-->
+
+        <div id="allmap" style="height: 500px; width: 100%;z-index: 1"></div>
+
+        <script src="../js/map.js"></script>
+    </ion-content>
+</ion-view>
+
+
+

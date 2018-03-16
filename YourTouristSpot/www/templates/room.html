@@ -1,0 +1,79 @@
+<ion-view view-title="Room">
+    <ion-content class="padding">
+        <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+
+        <div class="content has-header">
+
+            <div class="list card">
+
+                <div class="item">
+                    <h2>{{room_info.room_name}}</h2>
+                    <div class="row">
+
+                        <input id="input-21b"  class="rating form-control" style="height: 50px;height: 50px;">
+                        <button class="button-clear"  ng-click="uploadPoint()">提交分数</button>
+                    </div>
+                    {{user_point.value}}
+                    <h3>地址：{{room_info.location}}</h3>
+                    <span ng-repeat="tag in room_info.tags">
+                        {{tag}}
+                    </span>
+                    <p>由：&nbsp&nbsp{{room_info.username}}&nbsp&nbsp创建</p>
+                </div>
+
+                <div class="item item-body">
+                    <div class="item item-divider">图片</div>
+                    <!--<div ng-show="room_info.image.length == 0">暂无图片</div>-->
+                    <!--<span ng-repeat="img in room_info.image">-->
+                    <!--<img src={{img.imgPath}} style="max-height:300px; max-width:50%"/><span>by {{img.username}}</span>-->
+                    <img src="./templates/room.jpg" style="max-height:300px; max-width:50%"/><span>by qwe</span>
+                    </span>
+                    <div class="item item-divider item-icon-right">
+                        <!--icon ion-plus-circled-->
+                        空间介绍
+                        <button class="button-clear" ng-click="show_add_room_description_modal()" style="" >补充信息</button>
+
+                        <!--<button class="tab-item button-clear" ng-click="show_add_room_description_modal()"  >-->
+                            <!--<i class="icon ion-plus-circled"></i>-->
+                        <!--</button>-->
+                    </div>
+                    <span>共有 {{room_info.description.length}}人做出贡献</span>
+
+                    <div ng-repeat="descriptions in room_info.description">
+                        <div  class="row" >
+                            <p>
+                                {{descriptions.description}}
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                    <p>
+                        <span href="#" class="subdued">{{room_info.likes}} 喜欢</span>
+                        <button href="#" class="subdued button-clear" ng-click="showComments()">{{room_comments.length}} 评论</button>
+                    </p>
+
+                </div>
+
+                <div ng-repeat="comment in room_comments" class="item" ng-show="is_comments_show">
+                    <h2>{{comment.username}}:</h2>
+                    <p> {{comment.content}}</p>
+                </div>
+
+                <div class="item tabs tabs-secondary tabs-icon-left">
+                    <button class="tab-item button-clear"  ng-click="commit_add_like()">
+                        <i class="icon ion-thumbsup"></i>
+                        喜欢
+                    </button>
+                    <button class="tab-item button-clear" ng-click="show_add_room_comment_modal()">
+                        <i class="icon ion-chatbox"></i>
+                        评论
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </ion-content>
+</ion-view>
+

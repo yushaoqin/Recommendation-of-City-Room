@@ -1,0 +1,32 @@
+
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">补充描述</h1>
+        <button class="button button-clear button-primary" ng-click="add_room_description_modal.hide()">取消</button>
+    </ion-header-bar>
+    <ion-content>
+
+
+        <div class="list">
+            <div class="item item-divider">
+                描述
+            </div>
+            <label class="item item-input">
+                <textarea placeholder="Description" ng-model="new_room_info.description"></textarea>
+            </label>
+            <div class="item item-divider">
+                上传图片
+            </div>
+            <div class="item">
+                <div  class="item row" id="previewImg">
+                </div>
+                <input type="file" nv-file-select uploader="uploader"/><br/>
+            </div>
+
+        </div>
+        <button class="button button-full button-positive" ng-click="commit_add_room_description()">提交</button>
+
+    </ion-content>
+
+
+</ion-modal-view>

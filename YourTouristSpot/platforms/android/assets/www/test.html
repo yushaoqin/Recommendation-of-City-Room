@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>文件上传</title>
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/angular-file-upload/angular-file-upload.min.js"></script>
+    <script type="text/javascript">
+        angular
+                .module('app', ['angularFileUpload'])
+                .controller('AppController', function($scope, FileUploader,$http) {
+                    $scope.restAPI = function () {
+                        console.log("rest API TEST");
+                        $http(
+                                {
+                                    url: "http://localhost:8080/YSTServer/User",
+                                    method:'POST',
+                                    params:{
+                                        'username':"qwe",
+                                        'password':"qwe"
+                                    }
+                                }
+                        ).then(function suc(response){console.log(response)},function err(response){console.log(err)} )
+//                        console.log("rest API TEST");
+//                        $http(
+//                                {
+//                                    url: "http://localhost:8080/YSTServer/User?userId=7",
+//                                    method:'GET'
+//                                }
+//                        ).then(function suc(response){console.log(response)},function err(response){console.log(err)} )
+                    }
+                    $scope.uploader = new FileUploader({
+                        url: 'http://localhost:8080/YSTServer/UploadImage',
+                        formData:['黎明,5']
+                    });
+                    $scope.uploader.onAfterAddingFile = function(fileItem) {
+                        console.log(fileItem);
+                        console.info('添加一个文件', fileItem.file.name);
+                    };
+
+                    $scope.uploader.filters.push({
+                        name: 'customFilter',
+                        fn: function(item, options) {
+                            return this.queue.length < 2;
+                        }
+                    });
+
+                    $scope.aaa = function(){
+                        console.log('a');
+                        console.log($scope.uploader.queue);
+
+                    for (var i =0;i<$scope.uploader.queue.length;i++){
+                        console.log($scope.uploader.queue[i]);
+                        $scope.uploader.queue[i].formData = ["aaa,3"];
+                        $scope.uploader.queue[i].upload();
+                    }
+
+                    }
+
+                    $scope.b = function(i){
+                        console.log(i);
+                    }
+                    $scope.test = function(){
+                        console.log('http');
+                        $http({
+                            method:"POST",
+                            url:"http://localhost:8080/springmvc-mybatis/Test",
+                            params:{'id':1}
+                        }).then(function su(res){console.log(res)},function err(res){console.log('err')})
+                    };
+                });
+
+        var a = function(){
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("POST","http://localhost:8080/YSTServer/UploadImage",true);
+            xmlhttp.send();
+        }
+
+
+    </script>
+</head>
+
+<body>
+<div ng-app="app">
+    <div ng-controller="AppController">
+        <input type="file" nv-file-select uploader="uploader"/><br/>
+        <ul>
+            <li ng-repeat="item in uploader.queue">
+                Name: <span ng-bind="item.file.name"></span><br/>
+                <button ng-click="b(item)">upload</button>
+            </li>
+        </ul>
+
+        <button ng-click="test()">spring test</button>
+        <button ng-click="aaa()">aaa</button>
+        <div><button ng-click="restAPI()">TEST REST API</button></div>
+    </div>
+    <img src="http://localhost:8080/WebContent/WEB-INF/image/20170430042838532.jpg">
+    <div id="myDiv"></div>
+</div>
+
+</body>
+
+</html>

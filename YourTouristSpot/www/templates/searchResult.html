@@ -1,0 +1,18 @@
+<ion-view view-title="Search Result">
+    <ion-content>
+        <div class="list">
+            <div class="item item-divider"><button ng-click="showShaiXuan()" class="button-clear" style="position: fixed; right: 50%;top:5px;">筛选</button></div>
+            <div class="item" ng-show="isShaiXuanShow">
+                <ion-checkbox ng-repeat="item in tagList"
+                              ng-model="item.checked"
+                              ng-checked="item.checked">
+                    {{ item.text }}
+                </ion-checkbox>
+            </div>
+            <a class="item " ng-repeat="recommendation in search_result_to_show" ng-click="roomDetail(recommendation.id)">
+                <h2> {{recommendation.name}}{{recommendation.id}}</h2>
+                <span ng-repeat="tag in recommendation.tags">{{tag+"  "}}</span>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

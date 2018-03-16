@@ -1,0 +1,41 @@
+<ion-view view-title="Me">
+    <ion-content class="padding">
+
+
+
+
+
+        <div class="content has-header ionic-pseudo">
+
+            <div class="list">
+
+                <div class="item item-icon-left item-divider" ng-click="showLiked()">
+                    <i class="icon ion-ios-heart"></i>
+                    Favorites
+                </div>
+                <div ng-show="isShowLiked">
+                    <a class="item " ng-repeat="room in roomsLiked" ng-click="roomDetail(room.id)">
+                        <h2> {{room.name}}</h2>
+                        <span ng-repeat="tag in room.tags">{{tag+"  "}}</span>
+                    </a>
+                </div>
+
+                <div class="item item-icon-left item-icon-right item-divider"  ng-click="showShared()">
+                    <i class="icon ion-android-upload"></i>
+                    Share
+                    <i class=""></i>
+                </div>
+                <div ng-show = "isShowShared">
+                    <a class="item " ng-repeat="room in roomsShared" ng-click="roomDetail(room.id)">
+                        <h2> {{room.name}}{{room.id}}</h2>
+                        <span ng-repeat="tag in room.tags">{{tag+"  "}}</span>
+                    </a>
+                </div>
+
+                <a class="item button button-block button-calm" href="#/tab/login" ng-show="user.state == 0">登录</a>
+                <a class="item button button-block button-calm" href="#/tab/login" ng-show="user.state == 1">登出</a>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

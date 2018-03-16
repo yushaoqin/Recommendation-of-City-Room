@@ -1,0 +1,61 @@
+
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">添加新空间</h1>
+        <button class="button button-clear button-primary" ng-click="newRoomCancel()">取消</button>
+    </ion-header-bar>
+    <ion-content>
+
+
+        <div class="list">
+            <div class="item item-divider">
+                地址   <button class="button-clear icon ion-ios-location" ng-click="getCurrentPosition()" title="选择地址" ></button>
+            </div>
+            <label class="item item-input">
+                <input type="text" placeholder="location" ng-model="new_room.location.text" disabled>
+            </label>
+            <div class="item item-divider">
+                名称
+            </div>
+            <label class="item item-input">
+                <input type="text" placeholder="name" ng-model="new_room.name">
+            </label>
+
+            <div class="item item-divider">
+                标签
+            </div>
+            <ul class="item row">
+                <li class="item item-checkbox item-text-wrap col-20" ng-repeat="tag in tags">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-checked=tag.isChecked ng-model="tag.isChecked">
+                    </label>
+                   {{tag.text}}
+                </li>
+            </ul>
+
+            <div class="item item-divider">
+                描述
+            </div>
+            <label class="item item-input">
+                <textarea placeholder="Description" ng-model="new_room.description"></textarea>
+            </label>
+
+
+
+            <div class="item item-divider">
+                上传图片
+            </div>
+            <div class="item">
+                <div  class="item row" id="previewImg">
+                </div>
+                <input type="file" nv-file-select uploader="uploader"/><br/>
+            </div>
+
+
+        </div>
+        <button class="button button-full button-positive" ng-click="newRoomCommit()">提交</button>
+
+    </ion-content>
+
+
+</ion-modal-view>

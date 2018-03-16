@@ -1,0 +1,23 @@
+<ion-view view-title="Recommendation">
+    <ion-content>
+        <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+        <div class="list" ng-show="showRec">
+            <div class="item item-divider" style="text-align: center" >推荐结果</div>
+            <a class="item " ng-repeat="recommendation in recommendations" ng-click="roomDetail(recommendation.id)">
+               <h2> {{recommendation.name}}{{recommendation.id}}</h2>
+                <span ng-repeat="tag in recommendation.tags">{{tag+"  "}}</span>
+            </a>
+        </div>
+
+        <div class="list" ng-show="!showRec">
+            <div class="item item-divider bar " style="text-align: center" >请登录</div>
+            <div class="item" style="text-align: center">
+                <p>登陆后可获得推荐</p>
+                <br/>
+                <p>收藏、评分将有利于对您的推荐</p>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
+

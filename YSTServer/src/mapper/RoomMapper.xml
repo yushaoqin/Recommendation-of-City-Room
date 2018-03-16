@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.RoomMapper">
+	<!-- 自定义返回结果集 -->
+
+	<!-- ROOM -->
+	<resultMap id="roomMap" type="model.Room">
+		<id property="id" column="id" javaType="java.lang.Integer"></id>
+		<result property="name" column="name" javaType="java.lang.String"></result>
+		<result property="location" column="location" javaType="java.lang.String"></result>
+		<result property="lat" column="lat" javaType="java.math.BigDecimal"></result>
+		<result property="lng" column="lng" javaType="java.math.BigDecimal"></result>
+		<result property="username" column="username" javaType="java.lang.String"></result>
+		<result property="tags" column="tags" javaType="java.lang.String"></result>
+	</resultMap>
+
+	<!-- Room Description -->
+	<resultMap type="model.RoomDescription" id="roomDescriptionMap">
+		<id property="id" column="id" javaType="java.lang.Integer"></id>
+		<result property="username" column="username" javaType="java.lang.String"></result>
+		<result property="roomId" column="roomId" javaType="java.lang.Integer"></result>
+		<result property="description" column="description" javaType="java.lang.String"></result>
+	</resultMap>
+
+	<!-- ROOM COMMENT -->
+	<resultMap id="roomCommentMap" type="model.RoomComment">
+		<id property="id" column="id" javaType="java.lang.Integer"></id>
+		<result property="username" column="username" javaType="java.lang.String"></result>
+		<result property="roomId" column="roomId" javaType="java.lang.Integer"></result>
+		<result property="comment" column="comment" javaType="java.lang.String"></result>
+	</resultMap>
+
+	<!-- ROOM IMAGE -->
+	<resultMap id="roomImageMap" type="model.RoomImage">
+		<id property="id" column="id" javaType="java.lang.Integer"></id>
+		<result property="username" column="username" javaType="java.lang.String"></result>
+		<result property="roomId" column="roomId" javaType="java.lang.Integer"></result>
+		<result property="imgPath" column="imgPath" javaType="java.lang.String"></result>
+	</resultMap>
+
+	<!-- Room Point -->
+	<resultMap type="model.RoomPoint" id="roomPointMap">
+		<id property="id" column="id" javaType="java.lang.Integer"></id>
+		<result property="userId" column="userId" javaType="java.lang.Integer"></result>
+		<result property="roomId" column="roomId" javaType="java.lang.Integer"></result>
+		<result property="value" column="value" javaType="java.lang.Double"></result>
+	</resultMap>
+
+
+	<insert id="insertRoom" useGeneratedKeys="true" keyProperty="id"
+		parameterType="model.Room">
+		insert into room (name,location,username,tags,lat,lng)
+		values
+		(#{name},#{location},#{username},#{tags},#{lat},#{lng})
+	</insert>
+
+
+
+	<select id="selectRoomById" parameterType="int" resultMap="roomMap">
+		select * from room where id=#{id}
+	</select>
+
+
+
+	<select id="selectAllRoom" resultMap="roomMap">
+		select * from room
+	</select>
+
+	<select id="selectAllRoomComment" resultMap="roomCommentMap">
+		select * from
+		roomcomment
+	</select>
+
+	<select id="selectAllRoomImage" resultMap="roomImageMap">
+		select * from
+		roomimage
+	</select>
+
+	<select id="selectAllRoomDescription" resultMap="roomDescriptionMap">
+		select * from
+		roomdescription
+	</select>
+
+	<insert id="insertRoomDescription" useGeneratedKeys="true"
+		keyProperty="id" parameterType="model.RoomDescription">
+		insert into roomdescription
+		(username,description,roomId) values
+		(#{username},#{description},#{roomId})
+	</insert>
+
+	<select id="selectRoomDescriptionByRoomId" parameterType="int"
+		resultMap="roomDescriptionMap">
+		select * from roomdescription where roomId=#{roomId}
+	</select>
+
+	<select id="selectRoomCommentByRoomId" parameterType="int"
+		resultMap="roomCommentMap">
+		select * from roomcomment where roomId=#{roomId}
+	</select>
+
+	<select id="selectRoomImageByUsername" parameterType="String"
+		resultMap="roomImageMap">
+		select * from roomimage where username=#{username}
+	</select>
+
+	<select id="selectRoomCommentByUsername" parameterType="String"
+		resultMap="roomCommentMap">
+		select * from roomcomment where username=#{username}
+	</select>
+
+
+	<insert id="insertRoomComment" useGeneratedKeys="true"
+		keyProperty="id" parameterType="model.RoomComment">
+		insert into
+		roomcomment(username,comment,roomId) values
+		(#{username},#{comment},#{roomId})
+	</insert>
+
+
+	<select id="selectRoomsByIdList" resultMap="roomMap">
+		select *
+		from room
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+
+	<insert id="insertRoomImage" useGeneratedKeys="true"
+		keyProperty="id" parameterType="model.RoomImage">
+		insert into
+		roomimage(username,imgPath,roomId) values
+		(#{username},#{imgPath},#{roomId})
+	</insert>
+
+	<select id="selectRoomImageByRoomId" parameterType="int"
+		resultMap="roomImageMap">
+		select * from roomimage where roomId=#{roomId}
+	</select>
+
+	<select id="selectRoomByKeyWord" parameterType="String"
+		resultMap="roomMap">
+		select * from room where name like #{keyword}
+	</select>
+
+	<select id="selectRoomCommentByKeyWord" parameterType="String" resultMap="roomCommentMap">
+		select * from roomcomment where comment like #{keyword}
+	</select>
+
+	<select id="selectRoomDescriptionByKeyWord" parameterType="String"
+		resultMap="roomDescriptionMap">
+		select * from roomdescription where description like
+		#{keyword}
+	</select>
+
+
+	<!-- ROOM POINT -->
+
+	<select id="selectRoomPointByRoomId" parameterType="int"
+		resultMap="roomPointMap">
+		select * from roompoint where roomId = #{roomId}
+	</select>
+
+	<select id="selectRoomPointByUserId" parameterType="int"
+		resultMap="roomPointMap">
+		select * from roompoint where userId = #{userId}
+	</select>
+
+	<insert id="insertRoomPoint" useGeneratedKeys="true"
+		keyProperty="id" parameterType="model.RoomPoint">
+		insert into
+		roompoint(userId,roomId,value) values
+		(#{userId},#{roomId},#{value})
+	</insert>
+
+
+	<select id="selectRoomPointByUserIdAndRoomId" resultMap="roomPointMap">
+		select * from roompoint where userId = #{userId} and roomId =#{roomId}
+	</select>
+
+
+</mapper>
